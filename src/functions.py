@@ -16,7 +16,7 @@ def get_data(url):
         df = pd.json_normalize(data)
         return df
     except requests.RequestException as e:
-        print(f"There was an error retrieving data from {url}: {e}")
+        print(f"There was an error retrieving data from {url}: {e}. Check your connection with internet.")
 
 
 def transform_data(launches, rockets):
@@ -41,7 +41,7 @@ def transform_data(launches, rockets):
         return None
 
 
-def filter_by_date(df, year=None, month=None):
+def filter_by_date(df: pd.DataFrame, year=None, month=None):
     """
     Filter data
     :param df:
@@ -54,10 +54,10 @@ def filter_by_date(df, year=None, month=None):
     return df.loc[condition_year | condition_month]
 
 
-def generate_report(df, file_name, output_path="."):
+def generate_report(df: pd.DataFrame, file_name, output_path="."):
     """
     This function generates a report of the filtered dataframe
-    :param df:
+    :param df: pd.DataFrame
     :param file_name:
     :param output_path:
     :return: csv report file
@@ -86,3 +86,27 @@ def validation(file_path):
         print(f"There is no file at the path {file_path}")
     else:
         print(f"File at the path {file_path} exists.")
+
+
+def report(file_name, output_path=".", year=None, month=None):
+    """
+    This function generates a csv report
+    :param file_name:
+    :param output_path:
+    :param year:
+    :param month:
+    :return: csv report
+    """
+    try:
+        launches = get_data("https://api.spacexdata.com/v4/launches")
+        rockets = get_data("https://api.spacexdata.com/v4/rockets")
+        df = transform_data(launches, rockets)
+        df = filter_by_date(df, year=year, month=month)
+        generate_report(df, file_name=file_name, output_path=output_path)
+        validation(os.path.join(output_path, f"{file_name}.csv"))
+    except requests.RequestException as e:
+        print(f"Error during data retrieval: {e}. Check your connection with internet.")
+    except Exception as e:
+        print(f"There was an error: {e}")
+
+

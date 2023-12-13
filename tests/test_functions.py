@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 import pandas as pd
 from datetime import datetime
-from functions import get_data, transform_data, generate_report, validation, filter_by_date
+from src.functions import get_data, transform_data, generate_report, validation, filter_by_date
 
 
 @patch('functions.requests.get')
