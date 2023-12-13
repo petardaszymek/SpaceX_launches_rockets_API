@@ -4,6 +4,22 @@
 
 Ten projekt zawiera skrypt do generowania raportów na podstawie danych dotyczących startów rakiet SpaceX.
 Skrypt korzysta z funkcji z modułu `src.functions`, aby tworzyć raporty na podstawie dostarczonych parametrów, takich jak data i nazwa pliku CSV.
+## Instalacja
+
+1. Sklonuj repozytorium:
+
+```bash
+git clone https://github.com/twoje-konto/nazwa-projektu.git
+
+1. Przejdź do katalogu projektu:
+
+```bash
+cd nazwa-projektu
+
+2. Zainstaluj zależności:
+
+```bash
+pip install -r requirements.txt
 
 ## Jak Uruchomić w Bash
 
