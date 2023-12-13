@@ -1,15 +1,3 @@
-Requirements/Libraries:
-
-Python 3.x
-pandas
-requests
-pytest
-unittest.mock
-os
-datetime
-
-
-
 Rocket Launch Report Generator
 
 Functions Code:
