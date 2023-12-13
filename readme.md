@@ -1,49 +1,52 @@
-# Generator Raportów Startów Rakiet SpaceX
+# SpaceX Rocket Launch Report Generator
 
-## Opis
+## Description
 
-Ten projekt zawiera skrypt do generowania raportów na podstawie danych dotyczących startów rakiet SpaceX.
-Skrypt korzysta z funkcji z modułu `src.functions`, aby tworzyć raporty na podstawie dostarczonych parametrów, takich jak data i nazwa pliku CSV.
-## Instalacja
+This project contains a script for generating reports based on data related to SpaceX rocket launches. The script utilizes functions from the `src.functions` module to create reports based on provided parameters such as date and CSV file name.
 
-1. Sklonuj repozytorium:
+## Installation
 
-```bash
-git clone https://github.com/twoje-konto/nazwa-projektu.git
-
-1. Przejdź do katalogu projektu:
-
-```bash
-cd nazwa-projektu
-
-2. Zainstaluj zależności:
-
-```bash
-pip install -r requirements.txt
-
-## Jak Uruchomić w Bash
-
-1. Otwórz terminal i przejdź do katalogu projektu:
+1. Clone the repository:
 
     ```bash
-    cd sciezka/do/projektu
+    git clone https://github.com/your-account/project-name.git
     ```
 
-2. Uruchom skrypt `main.py`, podając odpowiednie argumenty:
+2. Navigate to the project directory:
 
     ```bash
-    python main.py --file_name NAZWA_PLIKU --output_path SCIEZKA_WYJSCIOWA --year ROK --month MIESIAC
+    cd project-name
     ```
 
-    Przykład:
+3. Install dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## How to Run in Bash
+
+1. Open a terminal and navigate to the project directory:
+
+    ```bash
+    cd path/to/project
+    ```
+
+2. Run the `main.py` script, providing the necessary arguments:
+
+    ```bash
+    python main.py --file_name FILE_NAME --output_path OUTPUT_PATH --year YEAR --month MONTH
+    ```
+
+    Example:
 
     ```bash
     python main.py --file_name spacex_launches --output_path C:/Users/User/Desktop --year 2020
     ```
 
-## Argumenty
+## Arguments
 
-- `--file_name`: Nazwa pliku CSV zawierającego dane o startach rakiet SpaceX.
-- `--output_path`: Ścieżka do katalogu wyjściowego (domyślnie bieżący katalog).
-- `--year`: Rok dla raportu (opcjonalny).
-- `--month`: Miesiąc dla raportu (opcjonalny).
+- `--file_name`: Name of the CSV file containing data about SpaceX rocket launches.
+- `--output_path`: Path to the output directory (default is the current directory).
+- `--year`: Year for the report (optional).
+- `--month`: Month for the report (optional).
