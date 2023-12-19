@@ -9,7 +9,7 @@ This project contains a script for generating reports based on data related to S
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/petardaszymek/interview_task.git
+    git clone https://github.com/petardaszymek/interview_task
     ```
 
 2. Navigate to the project directory:
