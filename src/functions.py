@@ -11,10 +11,12 @@ def get_data(url):
     """
     try:
         response = requests.get(url)
-        response.raise_for_status()
+        response.raise_for_status()  # check if the http request was succeed
         data = response.json()
         df = pd.json_normalize(data)
         return df
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP Error: {http_err}")
     except requests.RequestException as e:
         print(f"There was an error retrieving data from {url}: {e}. Check your connection with internet.")
 
@@ -108,5 +110,3 @@ def report(file_name, output_path=".", year=None, month=None):
         print(f"Error during data retrieval: {e}. Check your connection with internet.")
     except Exception as e:
         print(f"There was an error: {e}")
-
-
