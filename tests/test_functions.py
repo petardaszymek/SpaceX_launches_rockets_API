@@ -68,8 +68,8 @@ def test_filter_by_date_datetime_format():
     })
 
     filtered_df = filter_by_date(df, year=2022, month=1)
-    assert isinstance(filtered_df['static_fire_date_utc'].iloc[0], pd.Timestamp)
-    assert isinstance(filtered_df['static_fire_date_utc'].iloc[1], pd.Timestamp)
+    assert len(filtered_df) == 1
+    assert isinstance(filtered_df['static_fire_date_utc'].iloc[0], datetime)
 
 
 def test_generate_report(tmp_path):
@@ -81,7 +81,7 @@ def test_generate_report(tmp_path):
     file_name = "test_report"
     output_path = tmp_path
     result_df = generate_report(df, file_name, output_path)
-
+    # Check if csv file got created in file_path, and length rows file_path == result_df
     file_path = tmp_path / f"{file_name}.csv"
     assert file_path.exists()
     assert len(pd.read_csv(file_path)) == len(result_df)

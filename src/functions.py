@@ -53,7 +53,7 @@ def filter_by_date(df: pd.DataFrame, year=None, month=None):
     """
     condition_year = (df['static_fire_date_utc'].dt.year == int(year)) if year else True
     condition_month = (df['static_fire_date_utc'].dt.month == int(month)) if month else True
-    return df.loc[condition_year | condition_month]
+    return df.loc[condition_year & condition_month]
 
 
 def generate_report(df: pd.DataFrame, file_name, output_path="."):
@@ -103,7 +103,11 @@ def report(file_name, output_path=".", year=None, month=None):
         launches = get_data("https://api.spacexdata.com/v4/launches")
         rockets = get_data("https://api.spacexdata.com/v4/rockets")
         df = transform_data(launches, rockets)
+        print("Data before filtering:")
+        print(df.head())
         df = filter_by_date(df, year=year, month=month)
+        print("Data after filtering:")
+        print(df.head())
         generate_report(df, file_name=file_name, output_path=output_path)
         validation(os.path.join(output_path, f"{file_name}.csv"))
     except requests.RequestException as e:
