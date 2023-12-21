@@ -7,7 +7,8 @@ def main(file_name, output_path=".", year=None, month=None):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Process some command-line arguments')
+
+    parser = argparse.ArgumentParser(description='Parser is an object that analyses arguments from command-line')
 
     parser.add_argument('--file_name', type=str, help='Specify the file name')
     parser.add_argument('--output_path', type=str, default='.',

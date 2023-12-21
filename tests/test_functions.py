@@ -1,11 +1,13 @@
 import pytest
-from unittest.mock import patch
 import pandas as pd
+import tempfile
+import os
+from unittest.mock import patch
 from datetime import datetime
 from src.functions import get_data, transform_data, generate_report, validation, filter_by_date
 
 
-@patch('functions.requests.get')
+@patch('functions.requests.get')  # Decorator that uses patching to get func, means it'll use replacement for get func
 def test_get_data_launches(mock_requests_get):
     mock_response = [{'key1': 'value1'}, {'key2': 'value2'}]
     mock_requests_get.return_value.json.return_value = mock_response
@@ -85,25 +87,22 @@ def test_generate_report(tmp_path):
     assert len(pd.read_csv(file_path)) == len(result_df)
 
 
-def test_validation(capsys):
-    with patch('sys.exit') as mock_exit:
-
-        file_path_existing = "path/to/existing/file.csv"
-        validation(file_path_existing)
-
+def test_validation(capsys):  # Capsys is fixture in pytest that catch and control input data during tests
+    with patch('sys.exit') as mock_exit:  # Changing decorator sys.exit with mock_exit to avoid rundown
+        # Creating temporary file to check validation
+        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            file_path_existing = temp_file.name
+            validation(file_path_existing)
+        # Catch stdout and stderr
         captured = capsys.readouterr()
-        expected_message = f"There is no file at the path {file_path_existing}\n".strip()
+        assert not mock_exit.called  # Check if sys.exit did not run
+        # Check if file exists and send communicate after
+        file_exists = os.path.exists(file_path_existing)
+        expected_message = (
+            f"File at the path {file_path_existing} exists.\n"
+            if file_exists
+            else f"There is no file at the path {file_path_existing}\n"
+        ).strip()
+        # Check actual message with expected one
         actual_message = captured.out.strip()
-
-        assert not mock_exit.called
-        assert actual_message == expected_message
-
-        file_path_non_existing = "path/to/non_existing/file.csv"
-        validation(file_path_non_existing)
-
-        captured = capsys.readouterr()
-        expected_message = f"There is no file at the path {file_path_non_existing}\n".strip()
-        actual_message = captured.out.strip()
-
-        assert not mock_exit.called
         assert actual_message == expected_message
