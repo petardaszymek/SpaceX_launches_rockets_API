@@ -85,6 +85,7 @@ def test_generate_report(tmp_path):
     file_path = tmp_path / f"{file_name}.csv"
     assert file_path.exists()
     assert len(pd.read_csv(file_path)) == len(result_df)
+    file_path.unlink()
 
 
 def test_validation(capsys):  # Capsys is fixture in pytest that catch and control input data during tests
