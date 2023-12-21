@@ -1,5 +1,4 @@
 import argparse
-import os
 from functions import report
 
 
@@ -22,7 +21,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    main(file_name=args.file_name,
-         output_path=os.path.join(args.output_path),
-         year=args.year,
-         month=args.month)
+    main(file_name=args.file_name, output_path=args.output_path, year=args.year, month=args.month)
